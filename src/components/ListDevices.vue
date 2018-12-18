@@ -5,19 +5,19 @@
     <div v-for="device in devices" :key="device._id">
       <div class="form-group">
         <label for="name">ID:</label>
-        <input type="text" class="form-control" v-model="device._id">
+        <span>{{device._id}}</span>
       </div>
       <div class="form-group">
         <label for="name">IP:</label>
-        <input type="text" class="form-control" v-model="device.ip">
+        <span>{{device.ip}}</span>
       </div>
       <div class="form-group">
         <label for="name">Info:</label>
-        <input type="text" class="form-control" v-model="device.mlfb">
+        <span>{{device.mlfb}}</span>
       </div>
       <div class="form-group">
         <label for="name">Version:</label>
-        <input type="text" class="form-control" v-model="device.__v">
+        <span>{{device.__v}}</span>
       </div>
     </div>
   </div>
@@ -31,13 +31,17 @@ export default {
     }
   },
   mounted() {
-    this.$http.get('your server ip here').then(
+    this.$http.get('http://139.23.163.211:8421/plcs').then(
       result => {
-        console.log(JSON.stringify(result))
-        this.devices = result.pics
+        result = result.body
+        if (result.sucess) {
+          this.devices = result.plcs
+        } else {
+          alert('Failed getting plcs : ' + result.massage)
+        }
       },
       error => {
-        console.error(error)
+        console.error('Error : ' + JSON.stringify(error))
       }
     )
   }
