@@ -31,10 +31,27 @@ export default {
     }
   },
   mounted() {
+    console.log('mounted called')
+    // GET someUrl
+   /* this.$http.get('http://139.23.163.211:8421/plcs').then(response => {
+
+      // get body data
+      this.someData = response.body;
+    }, error => {
+      // error callback   
+
+    console.log('My error:' + error)
+        }
+      )
+    console.log('mounted ended' + this.someData) */
+
+      console.log('In between commands')
     this.$http.get('http://139.23.163.211:8421/plcs').then(
       result => {
+        console.log('Result getting body')
         result = result.body
-        if (result.sucess) {
+        if (!result.success) {
+          console.log('Result successful')
           this.devices = result.plcs
         } else {
           alert('Failed getting plcs : ' + result.massage)

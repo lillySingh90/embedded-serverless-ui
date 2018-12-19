@@ -2,11 +2,11 @@
   <div>
     <h1>Registration page</h1>
     <div class="form-group">
-      <label for="name">Device Name:</label>
+      <label for="name">Device Name:</label><br>
       <input type="text" class="form-control" v-model="deviceData.name">
     </div>
     <div class="form-group">
-      <label for="name">Device IP:</label>
+      <label for="name">Device IP:</label><br>
       <input type="text" class="form-control" v-model="deviceData.ip">
     </div>
     <div class="form-group">
@@ -32,10 +32,11 @@ export default {
   methods: {
     submitted() {
       this.$http
-        .post('https://httpbin.org/post', this.deviceData, {
+        .post('http://139.23.163.211:8421/plcs', this.deviceData, {
           headers: { 'content-type': 'application/json' }
         })
         .then(
+          console.log('entry'),
           result => {
             this.response = JSON.stringify(result.data)
           },
