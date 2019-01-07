@@ -1,29 +1,29 @@
 <template>
-<div>
-<div class="topnav">
-  <a  href="home">Home</a>
-  <a class="active" href="/list-devices">List of all devices</a>
-  <a href="/register">Registration of new device</a>
-  <a href="/triggers-list">Triggers list</a>
-  <a href="/scripts-list">Scripts list</a>
-</div>
+  <div>
+    <div class=topnav>
+      <a href="home">Home</a>
+      <a href="/list-devices">List of all devices</a>
+      <a href="/register">Registration of new device</a>
+      <a href="/triggers-list">Triggers list</a>
+      <a class="active" href="/scripts-list">Scripts list</a>
+    </div>
 
 
 
-    <h1>List of all devices</h1>
+    <h1>List of Scripts</h1>
     <table style="width:100%" border="true">
       <tr>
         <th>Nr.</th>
-        <th>ID</th>
-        <th>IP</th>
-        <th>MLFB</th>
+        <th>Name</th>
+        <th>Plc ID</th>
+        <th>Code</th>
         <th>Version</th>
       </tr>
       <tr v-for="(device, index) in devices" :key="device._id">
         <td>{{index}}</td>
         <td>{{device._id}}</td>
-        <td>{{device.ip}}</td>
-        <td>{{device.mlfb}}</td>
+        <td>{{device.name}}</td>
+        <td>{{device.code}}</td>
         <td>{{device.__v}}</td>
       <tr/>
     </table>
@@ -39,15 +39,14 @@ export default {
   },
   mounted() {
     console.log('mounted called')
-    
-    this.$http.get('http://139.23.163.211:8421/plcs').then(
+    this.$http.get('http://139.23.163.211:8421/scripts').then(
       result => {
-        console.log('Result getting body')
-        if (result.body.plcs) {
-          console.log('PLCs available')
-          this.devices = result.body.plcs
+        console.log('Result getting body',result)
+        if (result.body.scripts) {
+          console.log('Scripts available')
+          this.devices = result.body.scripts
         } else {
-          alert('Message plcs not abailabe. Do not be too sad!!!: ' + result.message)
+          alert('No scripts available... Now it is time to be sad!!!')
         }
       },
       error => {
@@ -57,7 +56,6 @@ export default {
   }
 }
 </script>
-
 <style>
 body {
   margin: 0;

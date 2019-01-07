@@ -1,29 +1,26 @@
 <template>
-<div>
-<div class="topnav">
-  <a  href="home">Home</a>
-  <a class="active" href="/list-devices">List of all devices</a>
-  <a href="/register">Registration of new device</a>
-  <a href="/triggers-list">Triggers list</a>
-  <a href="/scripts-list">Scripts list</a>
-</div>
-
-
-
-    <h1>List of all devices</h1>
-    <table style="width:100%" border="true">
+  <div>
+    <div class=topnav>
+      <a href="home">Home</a>
+      <a href="/list-devices">List of all devices</a>
+      <a href="/register">Registration of new device</a>
+      <a class="active" href="/triggers-list">Triggers list</a>
+      <a  href="/scripts-list">Scripts list</a>
+    </div>
+    <h1>List of all Triggers</h1>
+ <table style="width:100%" border="true">
       <tr>
         <th>Nr.</th>
         <th>ID</th>
-        <th>IP</th>
-        <th>MLFB</th>
+        <th>Plc ID</th>
+        <th>variable</th>
         <th>Version</th>
       </tr>
       <tr v-for="(device, index) in devices" :key="device._id">
         <td>{{index}}</td>
         <td>{{device._id}}</td>
-        <td>{{device.ip}}</td>
-        <td>{{device.mlfb}}</td>
+        <td>{{device.plcId}}</td>
+        <td>{{device.variable}}</td>
         <td>{{device.__v}}</td>
       <tr/>
     </table>
@@ -38,26 +35,27 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted called')
-    
-    this.$http.get('http://139.23.163.211:8421/plcs').then(
+     this.$http.get('http://139.23.163.211:8421/triggers').then(
       result => {
-        console.log('Result getting body')
-        if (result.body.plcs) {
-          console.log('PLCs available')
-          this.devices = result.body.plcs
+        console.log('Result getting Triggers')
+        if (result && result.body.trigger) {
+          console.log('Result successful')
+          console.log('this.result.trigger')
+          console.log(result.body.trigger)
+          this.devices = result.body.trigger
         } else {
-          alert('Message plcs not abailabe. Do not be too sad!!!: ' + result.message)
+          console.log('in else')
+          alert('Triggers list from plcs : '+ result.message)
+
         }
       },
       error => {
         console.error('Error : ' + JSON.stringify(error))
       }
-    )
+    ) 
   }
 }
 </script>
-
 <style>
 body {
   margin: 0;
