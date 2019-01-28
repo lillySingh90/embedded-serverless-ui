@@ -8,6 +8,7 @@ import Router from 'vue-router'
         <a href="/register">Registration of new device</a>
         <a href="/triggers-list">Triggers list</a>
         <a href="/scripts-list">Scripts list</a>
+        <a href="/script-editor">Scripts editor</a>
  </div>
  <br>
  <br>
@@ -42,7 +43,7 @@ body {
 }
 
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color: #82a5c5;
   color: white;
 }
 
@@ -50,4 +51,3 @@ body {
   float: right;
 }
 </style>
-

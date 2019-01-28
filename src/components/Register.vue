@@ -6,16 +6,29 @@
       <a class="active" href="/register">Registration of new device</a>
       <a href="/triggers-list">Triggers list</a>
       <a href="/scripts-list">Scripts list</a>
+      <a href="/script-editor">Scripts editor</a>
     </div>
     <h1>Registration page</h1>
     <div class="form-group">
-      <label for="name">Device Name:</label><br>
-      <input type="text" class="form-control" v-model="deviceData.name">
+      <label for="name">Device ID:</label><br>
+      <input type="text" class="form-control" v-model="deviceData._id">
     </div>
+    <br>
     <div class="form-group">
       <label for="name">Device IP:</label><br>
       <input type="text" class="form-control" v-model="deviceData.ip">
     </div>
+    <br>
+    <div class="form-group">
+      <label for="name">Device mlfb:</label><br>
+      <input type="text" class="form-control" v-model="deviceData.mlfb">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="name">Device version:</label><br>
+      <input type="text" class="form-control" v-model="deviceData.__v">
+    </div>
+    <br>
     <div class="form-group">
       <button class="btn btn-primary" v-on:click="submitted()">Submit!</button>
     </div>
@@ -38,6 +51,7 @@ export default {
   },
   methods: {
     submitted() {
+      console.log('entry in submitted')
       this.$http
         .post('http://139.23.163.211:8421/plcs', this.deviceData, {
           headers: { 'content-type': 'application/json' }
@@ -46,6 +60,7 @@ export default {
           console.log('entry'),
           result => {
             this.response = JSON.stringify(result.data)
+            console.log('message from plcs:' + result.data)
           },
           error => {
             console.error(error)
@@ -80,7 +95,7 @@ body {
 }
 
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color: #82a5c5;
   color: white;
 }
 
