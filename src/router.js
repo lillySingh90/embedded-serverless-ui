@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import Home from './components/Home.vue'
 import ListDevices from './components/ListDevices'
 import Register from './components/Register.vue'
+import TriggersList from './components/TriggersList'
+import ScriptsList from './components/ScriptsList'
+import ScriptEditor from './components/ScriptEditor'
 
 Vue.use(Router)
 
@@ -11,7 +14,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -24,6 +27,21 @@ export default new Router({
       path: '/list-devices',
       name: 'list-devices',
       component: ListDevices
+    },
+    {
+      path: '/triggers-list',
+      name: 'triggers-list',
+      component: TriggersList
+    },
+    {
+      path: '/scripts-list',
+      name: 'scripts-list',
+      component: ScriptsList
+    },
+    {
+      path: '/script-editor',
+      name: 'script-editor',
+      component: ScriptEditor
     }
   ]
 })
